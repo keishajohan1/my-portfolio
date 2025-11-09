@@ -1,0 +1,54 @@
+---
+alwaysApply: true
+---
+# Portfolio Website Project Rules
+
+## Project Context
+Building a professional portfolio website that mirrors LinkedIn profile information.
+
+## Required Sections
+1. Hero/Landing with profile photo, name, headline, CTAs
+2. Projects showcase (minimum 3 projects with cards)
+3. Skills section with animated progress bars
+4. Contact section with social links
+5. Responsive navigation
+
+## Data Source
+All content pulled from src/data/portfolioData.js - never hardcode content in components.
+
+## Styling Guidelines
+- Use Tailwind utility classes only
+- Consistent padding: py-16 md:py-24 for sections
+- Container: max-w-7xl mx-auto px-4
+
+# Portfolio Color Scheme
+
+## Brand Colors (MUST USE THESE EXACT VALUES)
+- Primary: #055742 (deep teal - main brand color)
+- Accent: #590F00 (burgundy - CTAs and highlights)
+- Secondary: #172EB1 (royal blue - links and interactive elements)
+- Background: #FFFFFF (white - main background)
+- Light Background: #DADFE1 (light gray - alternating sections)
+
+## Usage Guidelines
+- Hero section: Gradient from #055742 to #172EB1
+- CTA buttons: #590F00 with hover effect
+- Section backgrounds: Alternate between #FFFFFF and #DADFE1
+- Text on dark: #FFFFFF
+- Text on light: #1a1a1a
+- Links: #172EB1 with #590F00 hover
+
+## Tailwind Config
+Update tailwind.config.js with these exact colors.
+
+## Component Requirements
+- Every component must be responsive (mobile, tablet, desktop)
+- Use useScrollAnimation hook for scroll-triggered animations
+- All images must have alt text
+- All external links open in new tab (target="_blank" rel="noopener noreferrer")
+
+## Performance
+- Lazy load images
+- Minimize re-renders
+- Use proper React keys in lists
+- No console.log in production code
