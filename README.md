@@ -155,6 +155,62 @@ The color scheme is defined in `tailwind.config.js`:
 ```
 3. Run: `npm run deploy`
 
+### Google Cloud Run (with Buildpacks)
+
+The project is configured for Google Cloud Run deployment using Google Cloud Buildpacks. No Dockerfile is needed - buildpacks automatically detect and build Node.js applications.
+
+#### Prerequisites
+- Google Cloud SDK installed
+- Google Cloud project with Cloud Run API enabled
+- Repository connected to Google Cloud (GitHub, GitLab, or Bitbucket)
+
+#### Deployment Steps
+
+1. **Deploy via Cloud Console (Recommended)**:
+   - Go to Cloud Run in the Google Cloud Console
+   - Click "Create Service"
+   - Select "Deploy one revision from a source repository"
+   - Connect your repository (GitHub/GitLab/Bitbucket)
+   - Configure:
+     - **Port**: 8080
+     - **Build type**: Buildpacks (automatic)
+     - **Region**: Choose your preferred region
+     - **Authentication**: Allow unauthenticated invocations (if public)
+   - Click "Deploy"
+
+2. **Deploy via gcloud CLI**:
+```bash
+# Set your variables
+export PROJECT_ID=your-project-id
+export SERVICE_NAME=my-portfolio
+export REGION=us-central1
+
+# Deploy to Cloud Run (buildpacks will automatically detect Node.js)
+gcloud run deploy $SERVICE_NAME \
+  --source . \
+  --platform managed \
+  --region $REGION \
+  --allow-unauthenticated \
+  --port 8080
+```
+
+#### How Buildpacks Work
+- Google Cloud Buildpacks automatically detect Node.js applications
+- They run `npm install` and `npm run build` during the build phase
+- They start the application using `npm start`
+- No Dockerfile needed!
+
+#### Environment Variables
+- `PORT`: Automatically set by Cloud Run (defaults to 8080)
+- No additional environment variables required
+
+#### Important Notes
+- The server automatically listens on the PORT environment variable provided by Cloud Run
+- Buildpacks automatically build your app: `npm install` → `npm run build` → `npm start`
+- Express server serves the static files from the `dist` directory
+- All routes are handled by React Router (SPA routing)
+- Node.js version is specified in `package.json` under `engines.node`
+
 ## License
 
 This project is open source and available under the MIT License.
